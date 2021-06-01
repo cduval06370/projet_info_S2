@@ -24,7 +24,8 @@ public class Interface extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene sc = new Scene(new Board(Groupe.groupeTest()),900,600);
+        Scene sc = new Scene(new Board(Groupe.groupeTerrain()),900,600);
+        //affiche tout le ontenu de la board avec le terrain prédéfini
         primaryStage.setScene(sc);
         primaryStage.show();
     }

@@ -28,7 +28,6 @@ public class DessinCanvas extends Pane {
         
         this.main = main;
         this.realCanvas = new Canvas(this.getWidth(), this.getHeight()); //toute cette partie permet d'ajuster la taille du canvas à la fenêtre.
-        // this.asRect = new RectangleHV(0, 0, this.getWidth(), this.getHeight());
         this.getChildren().add(this.realCanvas);
         this.realCanvas.heightProperty().bind(this.heightProperty());
         this.realCanvas.heightProperty().addListener((o) -> {
@@ -42,48 +41,20 @@ public class DessinCanvas extends Pane {
         Controleur control = this.main.getControleur();
         control.clicDansZoneDessin(t);
          });
-        // this.realCanvas.setOnMouseMoved((t) -> {
-        //this.main.getControleur().mouseMovedDansZoneDessin(t);
-        // });
-        // this.redrawAll();
-        // }
-
-        //public void concatenateTransform(Transform trans) {
-        //    Transform oldTrans = this.realCanvas.getGraphicsContext2D().getTransform();
-        //    Transform newTrans = oldTrans.createConcatenation(trans);
-        //    this.setTransform(newTrans);
-        //}
-        // public void setTransform(Transform trans) {
-        //this.realCanvas.getGraphicsContext2D().setTransform(new Affine(trans));
-        //}
-
-        //public Transform getTransform() {
-        //    return this.realCanvas.getGraphicsContext2D().getTransform();
     }
 
     public void redrawAll() {
         GraphicsContext context = this.realCanvas.getGraphicsContext2D();
-        //System.out.println("redraw all");
+
         context.setFill(Color.WHITE);
-        //context.setTransform(new Affine());
+
         context.fillRect(0, 0, this.realCanvas.getWidth(), this.realCanvas.getHeight());
-        //this.asRect.setxMax(this.realCanvas.getWidth());
-        //this.asRect.setyMax(this.realCanvas.getHeight());
-        //Transform curTrans = this.main.getZoneModelVue().fitTransform(this.asRect);
-        //this.setTransform(curTrans);
        Groupe model = this.main.getModel();
         model.dessine(context);//pour l'afficher
         List<Figure> select = this.main.getControleur().getSelection(); //change la couleur de la selection= plus visuel
-        //if (!select.isEmpty()) {
            for (Figure f : select) {
                f.dessineSelection(context);
           }
-        // }
-        //Segment enCOurs = this.main.getControleur().getSegmentEnCoursDeCreation();
-        // if (enCOurs != null) {
-        //    context.setLineDashes(1, 1);
-        //    enCOurs.dessine(context);
-        //  context.setLineDashes(null);
-        //  }
+       
     }
 }

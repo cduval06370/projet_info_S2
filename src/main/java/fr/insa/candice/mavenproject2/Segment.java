@@ -73,14 +73,6 @@ public class Segment extends FigureSimple {
         return "[" + this.debut + "," + this.fin + ']';
     }
 
-    public static Segment demandeSegment() {
-        System.out.println("point début : ");
-        Point deb = Point.demandePoint();
-        System.out.println("point fin : ");
-        Point fin = Point.demandePoint();
-        return new Segment(deb, fin);
-    }
-
     @Override
     public double maxX() {
         return Math.max(this.debut.maxX(), this.fin.maxX());
@@ -135,16 +127,6 @@ public class Segment extends FigureSimple {
         context.strokeLine(this.debut.getPx(), this.debut.getPy(), this.fin.getPx(), this.fin.getPy());
     }
 
-    @Override
-    public void save(Writer w, Numeroteur<Figure> num) throws IOException {
-        if (!num.objExist(this)) {
-            int id = num.creeID(this);
-           // this.debut.save(w, num);
-            //this.fin.save(w, num);
-            w.append("Segment;" + id + ";" +
-                   // num.getID(this.debut) + ";" + num.getID(this.fin) +
-                    ";" + FigureSimple.saveColor(this.getCouleur())+"\n");
-        }
-    }
+    
 
 }

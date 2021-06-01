@@ -20,7 +20,9 @@ import javafx.stage.Stage;
 public class Board extends BorderPane {
 
     private RadioButton bNoeudS;
-    private RadioButton bBarre;
+    private RadioButton bBarretri;
+    private RadioButton bBarredou;
+    private RadioButton bBarresim;
     private RadioButton bNoeudApp;
     private RadioButton bSelect;
     private TextArea provisoire;
@@ -48,11 +50,23 @@ public class Board extends BorderPane {
             this.controleur.changeEtat(30); //on doit fixer l'état au debut pour qu'il sache lequel on a 
         });
 
-        this.bBarre = new RadioButton("Barre");
-        this.bBarre.setOnAction((t) -> {
-            System.out.println("barre sélectionné");
-            this.controleur.boutonBarre(t);
+        this.bBarretri = new RadioButton("Barre triple");
+        this.bBarretri.setOnAction((t) -> {
+            System.out.println("barre triple sélectionné");
+            this.controleur.boutonBarretri(t);
             this.controleur.changeEtat(20);
+        });
+        this.bBarredou = new RadioButton("Barre double");
+        this.bBarredou.setOnAction((t) -> {
+            System.out.println("barre sélectionné");
+            this.controleur.boutonBarredou(t);
+            this.controleur.changeEtat(50);
+        });
+        this.bBarresim = new RadioButton("Barre simple");
+        this.bBarresim.setOnAction((t) -> {
+            System.out.println("barre simple sélectionné");
+            this.controleur.boutonBarresim(t);
+            this.controleur.changeEtat(60);
         });
 
         this.bNoeudApp = new RadioButton("Noeud d'appui");
@@ -73,7 +87,9 @@ public class Board extends BorderPane {
 
         this.controleur = new Controleur(this);
 
-        VBox vbGauche = new VBox(this.getbNoeudS(), this.getbBarre(), this.getbNoeudApp(), this.getbSelect());
+        VBox vbGauche = new VBox(this.getbBarresim(),this.getbBarredou(),this.getbBarretri(),
+                this.getbNoeudS(), this.getbNoeudApp(), this.getbSelect() );
+                
         this.setLeft(vbGauche);
 
         this.cDessin = new DessinCanvas(this);
@@ -82,11 +98,13 @@ public class Board extends BorderPane {
             System.out.println("clic en " + t.getX() + "," + t.getY());
         });
 
-        // this.controleur.changeEtat(30); //on doit fixer l'état au debut pour qu'il sache lequel on a
+        
         
         ToggleGroup bgEtat = new ToggleGroup();  //méthode pour avoir un seul boutton selctionné à la fois
         this.bNoeudS.setToggleGroup(bgEtat);
-        this.bBarre.setToggleGroup(bgEtat);
+        this.bBarretri.setToggleGroup(bgEtat);
+        this.bBarredou.setToggleGroup(bgEtat);
+        this.bBarresim.setToggleGroup(bgEtat);
         this.bNoeudApp.setToggleGroup(bgEtat);
         this.bSelect.setToggleGroup(bgEtat);
 
@@ -96,9 +114,6 @@ public class Board extends BorderPane {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    // private void setCenter(TextArea provisoire) {
-    //     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    // }
     //GETTERS
     public void redrawAll() {
         this.cDessin.redrawAll();
@@ -128,8 +143,14 @@ public class Board extends BorderPane {
     /**
      * @return the bBarre
      */
-    public RadioButton getbBarre() {
-        return bBarre;
+    public RadioButton getbBarretri() {
+        return bBarretri;
+    }
+    public RadioButton getbBarredou() {
+        return bBarredou;
+    }
+    public RadioButton getbBarresim() {
+        return bBarresim;
     }
 
     /**
@@ -137,13 +158,6 @@ public class Board extends BorderPane {
      */
     public RadioButton getbNoeudApp() {
         return bNoeudApp;
-    }
-
-    /**
-     * @return the provisoire
-     */
-    public TextArea getProvisoire() {
-        return provisoire;
     }
 
     /**

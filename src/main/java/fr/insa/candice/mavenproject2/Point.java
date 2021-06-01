@@ -30,7 +30,7 @@ import javafx.scene.paint.Color;
  */
 public class Point extends FigureSimple {
     
-    public static double RAYON_IN_DRAW = 8; //fixe le rayon des points.
+    public static double RAYON_IN_DRAW = 8; //fixe le rayon des points pour les voir.
 
     private double px;
     private double py;
@@ -84,18 +84,6 @@ public class Point extends FigureSimple {
         this.py = py;
     }
 
-    @Override
-    public String toString() {
-        return "(" + px + "," + py + ')';
-    }
-
-    public static Point demandePoint() {
-        System.out.println("abscisse : ");
-        double px = Lire.d();
-        System.out.println("ordonnée : ");
-        double py = Lire.d();
-        return new Point(px, py);
-    }
 
     @Override
     public double maxX() {
@@ -126,7 +114,7 @@ public class Point extends FigureSimple {
     }
 
     @Override
-    public void dessine(GraphicsContext context) {
+    public void dessine(GraphicsContext context) { //affichage du point
         context.setFill(this.getCouleur());
         context.fillOval(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
     //dessine un oval/rond pour être plus visible.
@@ -138,13 +126,5 @@ public class Point extends FigureSimple {
         context.fillOval(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);      
     }
 
-    @Override
-    public void save(Writer w, Numeroteur<Figure> num) throws IOException {
-        if(! num.objExist(this)) {
-            int id = num.creeID(this);
-            w.append("Point;"+id+";"+this.px+";"+this.py+
-                    ";" + FigureSimple.saveColor(this.getCouleur()) + "\n");
-        }
-    }
 
 }
